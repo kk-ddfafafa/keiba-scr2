@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block customcss %}
+<link rel='stylesheet' type='text/css' href="{% static 'main_style.css' %}">
+
+{% endblock customcss %}
+
+
+
+{% block content %}
+<!--
+{{hiduke}}
+  {% if error %}
+  {{ error }}
+  {% endif %}
+-->
+<h4><center><p>日付と競馬場、レース番号を選択してください。出馬表とそれぞれの馬の指数を表示します。</p>
+    <p>指数を提供できるレースは9R目以降のみです。</p>
+    <p>また、障害レースは指数提供できません。このサイトの情報で損害を負っても責任は一切とりません。ご了承ください。</p></center></h4>
+  <br><br><br><br>
+<form method="post" action="">{% csrf_token %}
+    <center><h4>1. 西暦 (2011-2030年)</h4>
+    <p><select name="year"><option value="">&#8211;</option>
+        <option value="2011">2011</option><option value="2012">2012</option><option value="2013">2013</option><option value="2014">2014</option><option value="2015">2015</option><option value="2016">2016</option><option value="2017">2017</option><option value="2018">2018</option><option value="2019">2019</option><option value="2020">2020</option>
+        <option value="2021">2021</option><option value="2022">2022</option><option value="2023">2023</option><option value="2024">2024</option><option value="2025">2025</option><option value="2026">2026</option><option value="2027">2027</option><option value="2028">2028</option><option value="2029">2029</option><option value="2030">2030</option>
+        </select>　年</p>
+
+        <p><h4>2. 月（1月-12月)</h4>
+        <select name="month">
+        <option value="">-</option>
+        <option value="01">1</option>
+        <option value="02">2</option>
+        <option value="03">3</option>
+        <option value="04">4</option>
+        <option value="05">5</option>
+        <option value="06">6</option>
+        <option value="07">7</option>
+        <option value="08">8</option>
+        <option value="09">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        </select>　月</p>
+
+        <p><h4>3. 日（1日-31日)</h4>
+        <select name="day">
+        <option value="">-</option>
+        <option value="01">01</option><option value="02">02</option><option value="03">03</option><option value="04">04</option>
+        <option value="05">05</option><option value="06">06</option><option value="07">07</option><option value="08">08</option><option value="09">09</option>
+        <option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option>
+        <option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option>
+        <option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option>
+        <option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option>
+        <option value="30">30</option><option value="31">31</option>
+        </select>　日</p>
+
+        <p><h4>4. 競馬場</h4>
+        <select name="course">
+        <option value="">-</option>
+        <option value="01">札幌競馬場</option>
+        <option value="02">函館競馬場</option>
+        <option value="03">福島競馬場</option>
+        <option value="04">新潟競馬場</option>
+        <option value="05">東京競馬場</option>
+        <option value="06">中山競馬場</option>
+        <option value="07">中京競馬場</option>
+        <option value="08">京都競馬場</option>
+        <option value="09">阪神競馬場</option>
+        <option value="10">小倉競馬場</option>
+        </select>　</p>
+        <p><h4>5. レース番号(9R目以降のみ）</h4>
+        <select name="race">
+        <option value="09">9</option>
+        <option value="10">10</option>
+        <option value="11">11</option>
+        <option value="12">12</option>
+        </select>　</p>
+  <br>
+<p>データベースにないデータは表示されません。</p>
+  <p class="msr_sendbtn_05">
+    <input type="submit" value="Send">
+  </p>
+
+</center>
+</form>
+{% endblock content %}

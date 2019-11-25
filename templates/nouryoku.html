@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block customcss %}
+<link rel='stylesheet' type='text/css' href="{% static 'table_sort.css' %}">
+<link rel='stylesheet' type='text/css' href="{% static 'click_button.css' %}">
+<!--<script type="text/javascript" src="{% static 'js/table.js' %}"></script>-->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.0/js/jquery.tablesorter.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.0/css/theme.default.min.css">
+<style>
+
+#fav-table th {
+    background-color:pink;
+}
+</style>
+<script>
+$(document).ready(function() {
+    $('#fav-table').tablesorter();
+});
+</script>
+{% endblock customcss %}
+
+
+{% block content %}
+<p>指数や偏差値は数字が大きい方が能力上位です。予想タイムは数字が小さい方が能力上位です</p>
+<p>予想タイムは騎手が馬の能力を最大限に発揮した場合の予想です。</p>
+<p>基本的にはタイム指数と予想タイムから予想してください。</p>
+<div class="card-body">
+<table id="fav-table" class="table table-bordered">
+    <tr>
+        <thead>
+        <th>馬番</th>
+        <th>馬名</th>
+        <th>タイム指数</th>
+        <th>タイム指数（偏差値）</th>
+        <th>上がり３F指数</th>
+        <th>上がり３F指数（偏差値）</th>
+        <th>予想タイム</th>
+        </thead>
+    </tr>
+    {% for key ,value in bamei.items %}
+
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ value }}</td>
+        <td>{{nouryoku|get_item:forloop.counter}}</td>
+        <td>{{nouryoku_hensati|get_item:forloop.counter}}</td>
+        <td>{{agari|get_item:forloop.counter}}</td>
+        <td>{{agari_hensati|get_item:forloop.counter}}</td>
+        <td>{{yosou_time|get_item:forloop.counter}}</td>
+    </tr>
+    {% endfor %}
+</table>
+</div>
+<br>
+{% endblock content %}

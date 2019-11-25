@@ -1,0 +1,1 @@
+web: gunicorn keiba_scr.wsgi --log-file -
